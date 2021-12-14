@@ -1,4 +1,3 @@
-import { useReducer } from 'react'
 import api from '../herokuApi'
 
 const getFuncionario = (userName) => {
