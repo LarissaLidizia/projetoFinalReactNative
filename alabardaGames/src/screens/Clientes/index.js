@@ -57,7 +57,6 @@ export const Cliente = () => {
         async function fetchData() {
             try {
                 const response = await clienteService.getCliente();
-                console.log(response.data)
                 if (response) {
                     setLista(response.data)
                 }
@@ -121,14 +120,14 @@ export const Cliente = () => {
                             lista !== null ? (
                                 lista.map((cliente) => {
                                     return (
-                                        <View style={style.containerInformacoesLista}>
+                                        <View style={style.containerInformacoesLista} key={cliente.idCliente}>
                                             <View style={style.containerButtons}>
                                                 <TouchableOpacity
                                                     onPress={() => DeletarCliente(cliente.idCliente)}>
                                                     <Ionicons name="trash" size={24} color="white" />
                                                 </TouchableOpacity>
                                                 <TouchableOpacity
-                                                    onPress={() => navigation.navigate('AtualizarCliente')}>
+                                                    onPress={() => navigation.navigate('AtualizarCliente', {cliente:cliente})}>
                                                     <FontAwesome name="pencil-square-o" size={24} color="white" />
                                                 </TouchableOpacity>
                                             </View>

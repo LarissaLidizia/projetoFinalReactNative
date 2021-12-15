@@ -5,7 +5,6 @@ const getCliente = () => {
 }
 
 const getClienteId = (id) => {
-    console.log("ok", id)
     return herokuApi.get(`clientes/${id}`)
 }
 
@@ -17,8 +16,9 @@ const postCliente = () => {
     return herokuApi.post(`clientes`)
 }
 
-const putClienteId = (id) => {
-    return herokuApi.put(`clientes/${id}`)
+const putClienteId = (id, clientes) => {
+    console.log(`aqui`,clientes);
+    return herokuApi.put(`clientes/${id}`, clientes)
 } 
 
 export default {getCliente, getClienteId, deleteCliente, postCliente, putClienteId};
