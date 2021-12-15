@@ -41,7 +41,7 @@ export const style = EStyleSheet.create({
         width: '80%',
         borderRadius: 5,
         marginBottom: 10,
-
+        height: 40,
     },
     erro: {
         color: 'yellow',

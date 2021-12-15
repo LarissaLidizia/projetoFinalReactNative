@@ -21,8 +21,8 @@ export const style = EStyleSheet.create({
     containerPesquisa: {
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20,
-        borderBottomWidth: 2,
+        paddingTop: 10,
+        borderBottomWidth: 1,
         borderBottomColor: 'white',
     },
     
@@ -70,6 +70,7 @@ export const style = EStyleSheet.create({
         backgroundColor: 'rgba(19, 0, 139, 0.5)',
         padding: 5,
         borderRadius: 5,
+        marginBottom: 10,
     },
 
     containerInformacoesLista: {
@@ -84,9 +85,9 @@ export const style = EStyleSheet.create({
     textoPesquisa: {
         color: 'white',
         fontSize: 18,
-        textAlign: 'center',
-        
+        textAlign: 'center', 
     },
+
     nome: {
         color: 'white',
         fontSize: 20,
@@ -113,5 +114,47 @@ export const style = EStyleSheet.create({
     containerTextos: {
         alignItems: 'center',
         justifyContent: 'center',
-    }
+    },
+
+    containerButtonSair:{
+        alignItems: 'center',
+        justifyContent: 'center',
+    }, 
+
+    buttonSair:{
+        backgroundColor: '#00D2D2',
+        width: '30%',
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        marginBottom: 20,
+        flexDirection: 'row'
+    },
+
+    textoButton: {
+        color: 'white',
+        fontSize: 18,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginLeft: 5
+    },
+
+    containerButtonCadastrar:{
+        borderBottomWidth: 1,
+        borderBottomColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    buttonCadastrar:{
+        backgroundColor: '#00D2D2',
+        width: '80%',
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        marginBottom: 10,
+        marginTop: 10,
+    },
 })
