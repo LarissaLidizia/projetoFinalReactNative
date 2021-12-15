@@ -14,13 +14,16 @@ export const style = EStyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-
+        width: '100%',
+        height: '100%',
     },
 
     containerPesquisa: {
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
+        borderBottomWidth: 2,
+        borderBottomColor: 'white',
     },
     
     textoLabel: {
@@ -41,7 +44,7 @@ export const style = EStyleSheet.create({
         fontSize: 20,
         backgroundColor: 'white',
         color: '#575459',
-        width: '40%',
+        width: 160,
         height: 40,
         borderRadius: 5,
         marginRight: 10,
@@ -59,6 +62,56 @@ export const style = EStyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
-    }
+    },
 
+    containerInformacoes: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(19, 0, 139, 0.5)',
+        padding: 5,
+        borderRadius: 5,
+    },
+
+    containerInformacoesLista: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(19, 0, 139, 0.5)',
+        padding: 5,
+        borderRadius: 5,
+        margin: 10,
+    },
+
+    textoPesquisa: {
+        color: 'white',
+        fontSize: 18,
+        textAlign: 'center',
+        
+    },
+    nome: {
+        color: 'white',
+        fontSize: 20,
+        textAlign: 'center',
+        fontWeight: "bold",
+    },
+    
+    containerHeader: {
+        height: 60,
+    },
+
+    containerFooter: {
+        height: 60,
+    },
+
+    containerListarTodos: {
+
+    },
+
+    containerButtons: {
+        flexDirection: 'row',
+    },
+
+    containerTextos: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 })

@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, ScrollView, StatusBar } from 'react-native';
 import clienteService from '../../services/Requests/clienteService';
 import { LinearGradient } from 'expo-linear-gradient';
-import EStyleSheet from "react-native-extended-stylesheet";
 import { useNavigation } from "@react-navigation/native";
 import { style } from './style';
 import { Feather } from '@expo/vector-icons';
+import Header from '../../components/Header/index';
+import Footer from '../../components/Footer/index';
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 export const Cliente = () => {
+    const navigation = useNavigation();
+    const [lista, setLista] = useState([]);
     const [idPesquisa, setIdPesquisa] = useState();
     const [mensagemErro, setMensagemErro] = useState();
     const [cliente, setCliente] = useState({
@@ -20,31 +25,62 @@ export const Cliente = () => {
         celular: "",
     });
 
-    async function PesquisarCliente() {
+     async function PesquisarCliente() {
         try {
             const response = await clienteService.getClienteId(idPesquisa)
-            if (response) {
+                if(response){
                 setCliente({
-                    id: response.idCliente > 0 ? response.idCliente : 0,
-                    nomeCompleto: response.nomeCompleto,
-                    nomeUsuario: response.nomeUsuario,
-                    email: response.email,
-                    dataNasc: response.dataNasc,
-                    telefone: response.telefone,
-                    celular: response.celular,
+                    id: response.data.idCliente > 0 ? response.data.idCliente : 0,
+                    nomeCompleto: response.data.nomeCompleto,
+                    nomeUsuario: response.data.nomeUsuario,
+                    email: response.data.email,
+                    dataNasc: response.data.dataNasc,
+                    telefone: response.data.telefone,
+                    celular: response.data.celular,
                 })
+                setMensagemErro("")
             }
         } catch (error) {
-            setMensagemErro("Cliente inexistente")
+            setMensagemErro("Cliente inexistente!")
         }
     }
 
+    async function DeletarCliente(id) {
+        await clienteService.deleteCliente(id);
+        var listaFiltrada = lista.filter(cliente => cliente.id !== id);
+        setLista(listaFiltrada);
+        alert('Cliente deletado!')
+    }
+
+    useEffect(() => {
+        async function fetchData(){
+            try{
+                const response = await clienteService.getCliente();
+                console.log(response.data)
+                if(response){
+                    setLista(response.data)
+                }
+            }
+            catch(error) {
+                console.log(error)
+            }
+        }
+        fetchData();
+    },[])
+
     return (
-        <ScrollView>
+            <>
+            <StatusBar 
+            hidden= {false}
+            />
+            <View style={style.containerHeader}>
+            <Header/>
+            </View>
             <LinearGradient
                 colors={['#7A2A8C', '#510151', '#02041E']}
                 start={{ x: 0, y: 1 }}
                 end={{ x: 1, y: 0 }} style={style.container}>
+                <ScrollView>
                 <View style={style.containerPesquisa}>
                     <Text style={style.textoLabel}>PESQUISAR CLIENTE</Text>
                     <View style={style.containerInputButton}>
@@ -55,14 +91,63 @@ export const Cliente = () => {
                         </TextInput>
                         <TouchableOpacity style={style.button}
                             onPress={() => PesquisarCliente()}>
-                                <Feather name="search" size={24} color="white" />
+                            <Feather name="search" size={24} color="white" />
                         </TouchableOpacity>
-                    </View>
+                        </View>
                     <Text style={style.erro}>{mensagemErro}</Text>
+                        
+                        {cliente.id !== 0 ?(
+                            <View style={style.containerInformacoes} key={cliente?.nomeCompleto}>
+                                <Text style={style.nome}> {cliente?.nomeCompleto}</Text>
+                                <Text style={style.textoPesquisa}>
+                                    Nome de usuário: {cliente?.nomeUsuario}{'\n'}
+                                    Email: {cliente?.email}{'\n'}
+                                    Data de nascimento: {cliente?.dataNasc}{'\n'}
+                                    Telefones: {cliente?.telefone} / {cliente?.celular}
+                                </Text>
+                            </View>
+                        ): null }
                 </View>
+                <View style={style.containerListarTodos}>
+                    {
+                        lista !== null ? (
+                            lista.map((cliente) => {
+                                return(
+                                    <View style={style.containerInformacoesLista}>
+                                        <View style={style.containerButtons}>
+                                            <TouchableOpacity
+                                            onPress={() => DeletarCliente(cliente.idCliente)}>
+                                                <Ionicons name="trash" size={24} color="white" />
+                                            </TouchableOpacity>
+                                            <TouchableOpacity
+                                            onPress={() => navigation.navigate('AtualizarClientes')}>
+                                                <FontAwesome name="pencil-square-o" size={24} color="white" />
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={style.containerTextos}>
+                                            <Text style={style.nome}>
+                                                {cliente.nomeCompleto} - ID: {cliente.idCliente}
+                                            </Text>
+                                            <Text style={style.textoPesquisa}>
+                                                Nome de usuário: {cliente.nomeUsuario}{'\n'}
+                                                Email: {cliente.email}{'\n'}
+                                                Data de nascimento: {cliente.dataNasc}{'\n'}
+                                                Telefones: {cliente.telefone} / {cliente.celular}
+                                            </Text>
+                                        </View>
+                                    </View>
 
+                                )
+                            })
+                        ) : null
+                    }    
+                </View>
+                </ScrollView>
             </LinearGradient>
-        </ScrollView>
+            <View style={style.containerFooter}>
+                <Footer/>
+            </View>
+            </>
+        
     )
-    /*  <Octicons name='search' size={30} color='white' /> */
-}
+ }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login } from '../screens/Login'
-import {Cliente} from '../screens/Clientes'
+import { Login } from '../screens/Login';
+import {Cliente} from '../screens/Clientes';
+import {AtualizarCliente} from '../screens/Clientes/AtualizarClientes'
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,11 @@ export const Routes = () => {
             <Stack.Screen
                 name='Cliente'
                 component={Cliente}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name='AtualizarCliente'
+                component={AtualizarCliente}
                 options={{headerShown: false}}
             />
         </Stack.Navigator>
