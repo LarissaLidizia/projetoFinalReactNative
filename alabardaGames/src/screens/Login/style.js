@@ -55,6 +55,23 @@ export const style = EStyleSheet.create({
         alignItems: 'center',
         borderRadius: 5,
         margin: 10,
-    }
+    },
+
+    buttonMostrarTexto:{
+        color: '#FFFFFF',
+        height: 25,
+        fontSize: 14,
+        fontWeight:'bold'
+    },
+  
+    buttonMostrar:{
+        fontSize: 16,
+        alignItems:'flex-end',
+        width: '25%',
+        marginLeft: 200,
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
 })

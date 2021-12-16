@@ -105,7 +105,8 @@ export const AtualizarCliente=({ route, navigation }) => {
 
                         <Text style={style.textoLabel}>DATA DE NASCIMENTO</Text>
                         <TextInput style={style.input}
-                         placeholder='Digite a data de nascimento...'
+                         placeholder='Ex: 1980-12-27'
+                         keyboardType='numeric'
                          onChangeText={(valor) => setClientes({...clientes, dataNasc:valor})}
                          value={clientes.dataNasc}
                          ></TextInput>

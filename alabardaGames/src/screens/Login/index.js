@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { style } from './style'
-import { Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import funcionarioService from '../../services/Requests/funcionarioService'
 import { LinearGradient } from 'expo-linear-gradient';
 import EStyleSheet from "react-native-extended-stylesheet";
@@ -9,7 +9,11 @@ import EStyleSheet from "react-native-extended-stylesheet";
 EStyleSheet.build();
 
 export const Login = () => {
+
     const navigation = useNavigation();
+
+    const [senha, setSenha] = useState(true);
+    const [message, setMessage] = useState('Mostrar senha');
     const [senhaLogin, setSenhaLogin] = useState();
     const [usuarioLogin, setUsuarioLogin] = useState();
     const [mensagemErro, setMensagemErro] = useState("");
@@ -29,9 +33,14 @@ export const Login = () => {
         }
     }
 
+    function mostrarSenha() {
+        setSenha(!senha);
+        (message == "Mostrar senha") ? setMessage('Ocultar senha') : setMessage('Mostrar senha');
+    }
+
     return (
         <LinearGradient
-            colors={['#7A2A8C','#510151', '#02041E']}
+            colors={['#7A2A8C', '#510151', '#02041E']}
             start={{ x: 0, y: 1 }}
             end={{ x: 1, y: 0 }} style={style.container}>
             <Image style={style.logo} source={require('../../assets/logo.png')} />
@@ -45,7 +54,13 @@ export const Login = () => {
             <Text style={style.texto}>SENHA</Text>
             <TextInput style={style.input}
                 onChangeText={valor => setSenhaLogin(valor)}
+                secureTextEntry={senha}
                 placeholder="Digite sua senha..."></TextInput>
+            <TouchableOpacity
+                style={style.buttonMostrar}
+                onPress={() => mostrarSenha()}>
+                <Text style={style.buttonMostrarTexto}>{message}</Text>
+            </TouchableOpacity>
 
             <Text style={style.erro}>{mensagemErro}</Text>
 
