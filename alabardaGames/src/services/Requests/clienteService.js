@@ -12,12 +12,11 @@ const deleteCliente = (id) => {
     return herokuApi.delete(`clientes/${id}`)
 }
 
-const postCliente = () => {
-    return herokuApi.post(`clientes`)
+const postCliente = (clientes) => {
+    return herokuApi.post(`clientes`, clientes)
 }
 
 const putClienteId = (id, clientes) => {
-    console.log(`aqui`,clientes);
     return herokuApi.put(`clientes/${id}`, clientes)
 } 
 

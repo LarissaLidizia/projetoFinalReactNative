@@ -12,7 +12,6 @@ import apiViaCep from '../../../services/viaCepApi';
 
 export const AtualizarCliente=({ route, navigation }) => {
 
-
     const {cliente} = route.params;
     const[mensagemErro, setMensagemErro] = useState ();
     const[clientes, setClientes] = useState ({
@@ -62,7 +61,7 @@ export const AtualizarCliente=({ route, navigation }) => {
         }).catch((err) => {console.warn(err);});
     }
 
-    async function AtualizarCliente() {
+    async function Atualizar() {
         try{
             const response = await clienteService.putClienteId(clientes.idCliente, clientes);
             if (response){
@@ -74,10 +73,6 @@ export const AtualizarCliente=({ route, navigation }) => {
             console.log(err);
             setMensagemErro("Erro! Verifique as informações fornecidas.")
         }
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
     }
 
     return(
@@ -205,7 +200,7 @@ export const AtualizarCliente=({ route, navigation }) => {
                     </View>
                     <View style={style.containerButton}>
                         <TouchableOpacity style={style.buttonAtulizar}
-                        onPress={() => AtualizarCliente()}>
+                        onPress={() => Atualizar()}>
                             <Text style={style.textoButton}>ATUALIZAR CLIENTE</Text>
                         </TouchableOpacity>
 
